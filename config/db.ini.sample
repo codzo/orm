@@ -1,0 +1,5 @@
+db.driver=mysqli
+db.host=localhost
+db.dbname=dbname
+db.user=user
+db.password=pass
