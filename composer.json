@@ -1,6 +1,7 @@
 {
     "name": "codzo/orm",
     "type": "module",
+    "license": "MIT",
     "description": "ORM implementation based on Doctrine",
     "keywords": ["codzo", "orm", "php"],
     "homepage": "http://github.com/codzo/orm",
