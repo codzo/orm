@@ -2,6 +2,8 @@
 
 namespace Codzo\ORM;
 
+use Codzo\Config\Config;
+
 class EntityHelper
 {
     /**
@@ -85,5 +87,30 @@ class EntityHelper
                 $name
             )
         );
+    }
+
+    public static function getEntityClassName($entityname)
+    {
+        $config = Config::getInstance();
+        $entity_classname = self::toPascalCase($entityname);
+
+        $namespaces = preg_split(
+            '/[,; ]+/',
+            $config->get('entity.namespaces', '')
+        );
+
+        $entity_namespace = null;
+        foreach ($namespaces as $ns) {
+            if (class_exists($ns . "\\" . $entity_classname)) {
+                $entity_namespace = $ns;
+                break;
+            }
+        }
+
+        if ($entity_namespace) {
+            return $entity_namespace . "\\" . $entity_classname;
+        }
+
+        throw new \Exception("Can not find class for $entityname");
     }
 }
