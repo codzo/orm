@@ -14,6 +14,11 @@ class ORM
     private static $entityManager = null;
 
     /**
+     * @var Array
+     */
+    private static $orm_config_paths = [];
+
+    /**
      * @return \Doctrine\ORM\EntityManager
      */
     public static function getEntityManager()
@@ -24,7 +29,7 @@ class ORM
                 $rootpath = APP_ROOTPATH;
             }
 
-            $paths = array($rootpath . '/config/orm-mapping');
+            $paths = self::getORMConfigPaths();
             $config = new Config($rootpath . '/config');
 
             // convert setting to true/false
@@ -47,5 +52,24 @@ class ORM
         }
 
         return static::$entityManager;
+    }
+
+
+    /**
+     * @param  $path    String list of config path
+     * @return Array    list of config path
+     */
+    public static function addORMConfigPath($path)
+    {
+        self::$orm_config_paths[] = $path;
+        return self::$orm_config_paths;
+    }
+
+    /**
+     * @return Array list of config path
+     */
+    public static function getORMConfigPaths()
+    {
+        return self::$orm_config_paths;
     }
 }
