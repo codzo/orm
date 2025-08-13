@@ -35,6 +35,7 @@ class ORM
 
             // convert setting to true/false
             $isDevMode = !! $config->get('app.debug.mode', false);
+            $isXsdValidationEnabled  = !! $config->get('app.xml.validateXSL', false);
 
             // define credentials...
             $connectionOptions = array(
@@ -46,7 +47,13 @@ class ORM
                 'charset'  => 'UTF8'
             );
 
-            $ormConfig = ORMSetup::createXMLMetadataConfiguration($paths, $isDevMode);
+            $ormConfig = ORMSetup::createXMLMetadataConfiguration(
+                $paths,
+                $isDevMode,
+                null,
+                null,
+                $isXsdValidationEnabled
+            );
 
             static::$entityManager = new EntityManager(
                 DriverManager::getConnection($connectionOptions, $ormConfig),
