@@ -2,6 +2,7 @@
 
 namespace Codzo\ORM;
 
+use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMSetup;
 use Codzo\Config\Config;
