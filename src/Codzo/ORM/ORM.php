@@ -45,9 +45,11 @@ class ORM
                 'charset'  => 'UTF8'
             );
 
+            $ormConfig = ORMSetup::createXMLMetadataConfiguration($paths, $isDevMode);
+
             static::$entityManager = new EntityManager(
-                $connectionOptions,
-                ORMSetup::createXMLMetadataConfiguration($paths, $isDevMode)
+                DriverManager::getConnection($connectionOptions, $ormConfig),
+                $ormConfig
             );
         }
 
