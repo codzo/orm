@@ -3,7 +3,7 @@
 namespace Codzo\ORM;
 
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Tools\Setup;
+use Doctrine\ORM\ORMSetup;
 use Codzo\Config\Config;
 
 class ORM
@@ -45,9 +45,9 @@ class ORM
                 'charset'  => 'UTF8'
             );
 
-            static::$entityManager = EntityManager::create(
+            static::$entityManager = new EntityManager(
                 $connectionOptions,
-                Setup::createXMLMetadataConfiguration($paths, $isDevMode)
+                ORMSetup::createXMLMetadataConfiguration($paths, $isDevMode)
             );
         }
 
