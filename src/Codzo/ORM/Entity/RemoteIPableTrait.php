@@ -32,6 +32,6 @@ trait RemoteIPableTrait
      */
     public function remoteIPableOnPrePersist()
     {
-        $this->remote_ip = $_SERVER['REMOTE_ADDR'];
+        $this->remote_ip = $_SERVER['REMOTE_ADDR'] ?? 'local';
     }
 }
